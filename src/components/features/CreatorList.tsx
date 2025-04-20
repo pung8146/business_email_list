@@ -1,0 +1,80 @@
+import Image from "next/image";
+import { Creator } from "@/types/database";
+
+interface CreatorListProps {
+  creators: Creator[];
+}
+
+export default function CreatorList({ creators }: CreatorListProps) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {creators.map((creator) => (
+        <div
+          key={creator.id}
+          className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6"
+        >
+          <div className="flex items-center space-x-4">
+            <div className="relative w-16 h-16">
+              <Image
+                src={creator.profile_image_url}
+                alt={creator.channel_title}
+                fill
+                className="rounded-full object-cover"
+              />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold">{creator.channel_title}</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                구독자 {formatNumber(creator.subscriber_count)}명
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-4">
+            {creator.business_email && (
+              <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
+                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  비즈니스 이메일
+                </p>
+                <a
+                  href={`mailto:${creator.business_email}`}
+                  className="text-blue-600 dark:text-blue-400 hover:underline break-all"
+                >
+                  {creator.business_email}
+                </a>
+              </div>
+            )}
+
+            <p className="mt-3 text-sm text-gray-600 dark:text-gray-300 line-clamp-3">
+              {creator.channel_description}
+            </p>
+
+            <div className="mt-4 text-xs text-gray-500 dark:text-gray-400">
+              마지막 업데이트: {formatDate(creator.last_updated)}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function formatNumber(num: number): string {
+  if (num >= 10000000) {
+    return `${(num / 10000000).toFixed(1)}천만`;
+  } else if (num >= 10000) {
+    return `${(num / 10000).toFixed(1)}만`;
+  }
+  return num.toLocaleString();
+}
+
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
