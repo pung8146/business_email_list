@@ -6,6 +6,27 @@ interface CreatorListProps {
 }
 
 export default function CreatorList({ creators }: CreatorListProps) {
+  if (!creators || creators.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-16 text-center">
+        <div className="relative w-24 h-24 mb-6">
+          <Image
+            src="/images/empty-state.svg"
+            alt="데이터 없음"
+            fill
+            className="object-contain"
+          />
+        </div>
+        <h2 className="text-xl font-semibold mb-2">
+          등록된 크리에이터가 없습니다
+        </h2>
+        <p className="text-gray-500 dark:text-gray-400 max-w-md">
+          아직 등록된 유튜버가 없습니다. 나중에 다시 확인해주세요.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {creators.map((creator) => (
