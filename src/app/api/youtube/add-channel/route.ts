@@ -42,7 +42,6 @@ export async function POST(request: Request) {
     const insertData = {
       channel_id: channelInfo.channelId,
       channel_title: channelInfo.title,
-      business_email: channelInfo.businessEmail,
       subscriber_count: channelInfo.subscriberCount,
       video_count: channelInfo.videoCount,
       channel_description: channelInfo.description,

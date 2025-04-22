@@ -38,7 +38,7 @@ export async function GET(request: Request) {
           .from("creators")
           .update({
             channel_title: channelInfo.title,
-            business_email: channelInfo.businessEmail,
+
             subscriber_count: channelInfo.subscriberCount,
             video_count: channelInfo.videoCount,
             channel_description: channelInfo.description,

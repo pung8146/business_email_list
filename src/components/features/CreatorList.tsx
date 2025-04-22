@@ -52,20 +52,6 @@ export default function CreatorList({ creators }: CreatorListProps) {
           </div>
 
           <div className="mt-4">
-            {creator.business_email && (
-              <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
-                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  비즈니스 이메일
-                </p>
-                <a
-                  href={`mailto:${creator.business_email}`}
-                  className="text-blue-600 dark:text-blue-400 hover:underline break-all"
-                >
-                  {creator.business_email}
-                </a>
-              </div>
-            )}
-
             <p className="mt-3 text-sm text-gray-600 dark:text-gray-300 line-clamp-3">
               {creator.channel_description}
             </p>

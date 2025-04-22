@@ -2,7 +2,6 @@ export interface Creator {
   id: string;
   channel_id: string;
   channel_title: string;
-  business_email: string | null;
   subscriber_count: number;
   video_count: number;
   channel_description: string;
